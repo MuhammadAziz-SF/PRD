@@ -1,144 +1,134 @@
-# Job Abroad Platform
+# 🌍 Job Abroad Platform
 
-## Overview
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Docker](https://img.shields.io/badge/Docker-Supported-blue)](https://www.docker.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supported-blue)](https://www.postgresql.org/)
 
-The **Job Abroad Platform** is a web-based application designed to connect job seekers with international employment opportunities and employers seeking to hire global talent. It streamlines the job search, application, interview, and hiring processes, with a specialized focus on cross-border employment, including visa and relocation support.
+> Connect with global opportunities and find your dream job abroad! 🌎
 
-## Features
+## 📋 Table of Contents
+- [Overview](#-overview)
+- [Features](#-features)
+- [API Documentation](#-api-documentation)
+- [Installation](#-installation)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-### User Registration and Profile Management
+## 🌟 Overview
 
-- **Sign-Up & Login**: Users can sign up with email and password (email verification required) and log in with their credentials.
-- **Profile Management**: Users can update personal details, upload resumes, add education/work history, and manage visa information.
-- **Resume & Document Upload**: Users can upload multiple resumes and additional documents like certificates or portfolios.
+The **Job Abroad Platform** is a modern web application designed to bridge the gap between job seekers and international employment opportunities. Our platform specializes in cross-border employment, offering comprehensive support for visa processing and relocation services.
 
-### Job Search and Discovery
+### 🎯 Key Benefits
+- ✈️ Seamless international job search
+- 🛂 Integrated visa support
+- 🌐 Multi-currency and timezone support
+- 📱 Real-time notifications
+- 📊 Advanced job matching algorithms
 
-- **Search Jobs**: Filter jobs by location, job type, salary, experience level, visa sponsorship, and more.
-- **Saved Jobs**: Users can save jobs for later reference.
-- **Job Alerts**: Set up alerts for new job postings based on search criteria.
+## ✨ Features
 
-### Job Application Process
+### 👤 User Management
+| Feature | Description |
+|---------|-------------|
+| **Sign-Up & Login** | Secure authentication with email verification |
+| **Profile Management** | Complete control over personal and professional details |
+| **Document Upload** | Support for resumes, certificates, and portfolios |
 
-- **Apply for Jobs**: Users can submit applications with their resume and cover letter.
-- **Track Applications**: View the status of applications (submitted, under review, etc.) and withdraw applications if needed.
+### 🔍 Job Discovery
+| Feature | Description |
+|---------|-------------|
+| **Advanced Search** | Filter by location, salary, experience, and visa requirements |
+| **Job Alerts** | Get notified about matching opportunities |
+| **Saved Jobs** | Bookmark interesting positions for later |
 
-### Interview Scheduling and Management
+### 📝 Application Process
+| Feature | Description |
+|---------|-------------|
+| **One-Click Apply** | Quick application submission |
+| **Application Tracking** | Real-time status updates |
+| **Interview Management** | Schedule and track interviews |
 
-- **Schedule Interviews**: Employers can schedule phone, video, or in-person interviews.
-- **Notifications & Reminders**: Applicants will receive notifications for scheduled interviews.
-- **Feedback and Ratings**: Employers can provide feedback and rate candidates post-interview.
+### 🏢 Employer Features
+| Feature | Description |
+|---------|-------------|
+| **Company Profiles** | Showcase your organization |
+| **Job Posting** | Create detailed job listings |
+| **Candidate Management** | Track and manage applicants |
 
-### Contract Management
+## 🔌 API Documentation
 
-- **Create and Manage Contracts**: Employers can create and send job offers/contracts, detailing salary, benefits, and employment terms.
-- **Contract Workflow**: Contracts can be in draft, active, or completed status.
+### Authentication
+```http
+POST /auth/signup
+Content-Type: application/json
 
-### Company Profile and Job Posting
+{
+  "email": "user@example.com",
+  "password": "securepassword"
+}
+```
 
-- **Company Profile**: Companies create a profile with details such as company name, size, industry, and logo.
-- **Job Posting**: Employers can post job opportunities with all necessary details (description, salary, benefits, etc.).
+### Job Search
+```http
+GET /jobs/search?location=USA&salary=50000&visa=sponsored
+```
 
-### Notifications
+[View Full API Documentation →](docs/API.md)
 
-- **In-App & Email Notifications**: Users and employers are notified of important events like job updates, interview schedules, application status, etc.
+## 🚀 Installation
 
-### International Features
+### Prerequisites
+- Node.js (v14 or higher)
+- PostgreSQL or MySQL
+- Docker (optional)
 
-- **Visa Support**: Users can manage their visa details and job listings will indicate visa sponsorship availability.
-- **Foreign Experience**: Users can highlight foreign education and work experience.
-- **Currency & Timezone Support**: Platform supports multiple currencies and timezones for international users.
-
-## API Endpoints
-
-### User Registration and Profile Management
-
-- `POST /auth/signup` - Register a new user.
-- `POST /auth/login` - Login to an existing user account.
-- `PUT /user/profile` - Update user profile details.
-- `POST /user/upload-resume` - Upload a resume.
-- `PUT /user/address` - Add or update an address.
-- `PUT /user/education` - Add or update education history.
-- `PUT /user/work-experience` - Add or update work experience.
-
-### Job Search and Discovery
-
-- `GET /jobs/search` - Search jobs with filters.
-- `POST /jobs/save` - Save a job for later.
-- `GET /jobs/alerts` - Set up job alerts.
-
-### Job Application Process
-
-- `POST /applications` - Apply for a job.
-- `GET /applications/status` - Track application status.
-
-### Interview Scheduling and Management
-
-- `POST /interviews/schedule` - Schedule an interview.
-- `GET /interviews/notifications` - Get interview notifications and reminders.
-
-### Contract Management
-
-- `POST /contracts` - Create and send a job offer contract.
-- `PUT /contracts/status` - Update the contract status.
-
-### Company Profile and Job Posting
-
-- `POST /company/profile` - Create or update a company profile.
-- `POST /jobs/post` - Post a new job listing.
-
-### Notifications
-
-- `GET /notifications` - Get user notifications.
-- `POST /notifications/send` - Send a notification.
-
-### International Features
-
-- `GET /user/visa` - Manage visa details.
-- `GET /user/foreign-experience` - Add or update foreign experience.
-
-## Installation
-
-### Requirements
-
-- Node.js (v14+)
-- Database (PostgreSQL, MySQL, etc.)
-- Docker (Optional, for containerization)
-
-### Steps to Set Up
-
+### Quick Start
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/job-abroad-platform.git
-    cd job-abroad-platform
-    ```
+   ```bash
+   git clone https://github.com/yourusername/job-abroad-platform.git
+   cd job-abroad-platform
+   ```
 
 2. Install dependencies:
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
-3. Set up environment variables:
-    - Create a `.env` file based on `.env.example` and configure your database and API keys.
+3. Configure environment:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
 
-4. Run the application:
-    ```bash
-    npm start
-    ```
+4. Start the application:
+   ```bash
+   npm start
+   ```
 
-5. Optionally, run the app with Docker:
-    ```bash
-    docker-compose up
-    ```
+### Docker Setup
+```bash
+docker-compose up -d
+```
 
-## Contributing
+## 🤝 Contributing
 
-We welcome contributions! If you’d like to contribute, please fork the repository, make your changes, and submit a pull request.
+We welcome contributions! Here's how you can help:
 
-## License
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Please read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-Feel free to modify and expand this template to include any additional details or specific instructions that may apply to your project!
+<div align="center">
+  <sub>Built with ❤️ by the Job Abroad Platform Team</sub>
+</div>
