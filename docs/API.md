@@ -55,6 +55,60 @@ Content-Type: application/json
 }
 ```
 
+## 📋 Data Types
+
+### ENUM Types
+
+#### Gender
+```sql
+ENUM ('male', 'female', 'other')
+```
+
+#### Job Status
+```sql
+ENUM ('active', 'inactive', 'terminated')
+```
+
+#### Proficiency
+```sql
+ENUM ('beginner', 'intermediate', 'advanced', 'expert')
+```
+
+#### Language Proficiency
+```sql
+ENUM ('basic', 'conversational', 'fluent', 'native')
+```
+
+#### Visa Status
+```sql
+ENUM ('applied', 'approved', 'rejected', 'expired')
+```
+
+#### Job Type
+```sql
+ENUM ('full-time', 'part-time')
+```
+
+#### Application Status
+```sql
+ENUM ('submitted', 'under_review', 'shortlisted', 'rejected', 'accepted')
+```
+
+#### Contract Status
+```sql
+ENUM ('draft', 'active', 'completed', 'terminated')
+```
+
+#### Notification Type
+```sql
+ENUM ('job_alert', 'interview', 'contract', 'application_update', 'system')
+```
+
+#### User Action
+```sql
+ENUM ('suspend', 'delete', 'warn', 'restrict')
+```
+
 ## 👤 User Management
 
 ### Profile Endpoints
@@ -71,10 +125,13 @@ GET /user/profile
   "email": "user@example.com",
   "firstName": "John",
   "lastName": "Doe",
-  "phone": "+1234567890",
-  "location": "New York, USA",
+  "phoneNumber": "+1234567890",
+  "dateOfBirth": "1990-01-01",
   "profilePicture": "https://example.com/profile.jpg",
-  "createdAt": "2024-01-01T00:00:00Z"
+  "bio": "Software Engineer with 5 years of experience",
+  "gender": "male",
+  "createdAt": "2024-01-01T00:00:00Z",
+  "updatedAt": "2024-01-01T00:00:00Z"
 }
 ```
 
@@ -86,8 +143,27 @@ Content-Type: application/json
 {
   "firstName": "John",
   "lastName": "Doe",
-  "phone": "+1234567890",
-  "location": "New York, USA"
+  "phoneNumber": "+1234567890",
+  "dateOfBirth": "1990-01-01",
+  "gender": "male",
+  "bio": "Updated bio"
+}
+```
+
+### Address Management
+
+#### Add/Update Address
+```http
+POST /user/address
+Content-Type: application/json
+
+{
+  "addressLine1": "123 Main St",
+  "addressLine2": "Apt 4B",
+  "city": "New York",
+  "state": "NY",
+  "postalCode": 10001,
+  "isPrimary": true
 }
 ```
 
@@ -116,11 +192,117 @@ Content-Type: multipart/form-data
 }
 ```
 
+## 📝 Professional Information
+
+### Education
+
+#### Add Education
+```http
+POST /user/education
+Content-Type: application/json
+
+{
+  "institution": "University of Technology",
+  "degree": "Bachelor of Science",
+  "fieldOfStudy": "Computer Science",
+  "startDate": "2015-09-01",
+  "endDate": "2019-05-30",
+  "grade": "3.8",
+  "description": "Focused on software development and algorithms",
+  "country": "USA",
+  "isForeign": false
+}
+```
+
+### Work Experience
+
+#### Add Work Experience
+```http
+POST /user/work-experience
+Content-Type: application/json
+
+{
+  "companyName": "Tech Corp",
+  "position": "Senior Software Engineer",
+  "location": "San Francisco",
+  "country": "USA",
+  "startDate": "2019-06-01",
+  "endDate": "2023-12-31",
+  "currentJobStatus": "active",
+  "description": "Led development of core features",
+  "isForeign": false
+}
+```
+
+### Skills
+
+#### Add Skill
+```http
+POST /user/skills
+Content-Type: application/json
+
+{
+  "name": "JavaScript",
+  "proficiency": "expert",
+  "yearsOfExperience": 5,
+  "hasCertificate": true
+}
+```
+
+### Languages
+
+#### Add Language
+```http
+POST /user/languages
+Content-Type: application/json
+
+{
+  "languageName": "Spanish",
+  "proficiency": "fluent",
+  "isPrimary": false
+}
+```
+
+### Certifications
+
+#### Add Certification
+```http
+POST /user/certifications
+Content-Type: application/json
+
+{
+  "name": "AWS Certified Solutions Architect",
+  "issuingOrganization": "Amazon Web Services",
+  "issueDate": "2023-01-15",
+  "expirationDate": "2026-01-15",
+  "credentialId": "AWS-123456",
+  "credentialUrl": "https://aws.amazon.com/certification",
+  "isForeign": false
+}
+```
+
+### Visa Information
+
+#### Add Visa Info
+```http
+POST /user/visa
+Content-Type: application/json
+
+{
+  "visaType": "H1B",
+  "visaCountry": "USA",
+  "visaStatus": "approved",
+  "expiryDate": "2025-12-31",
+  "multipleEntry": true,
+  "notes": "Valid for employment"
+}
+```
+
 ## 🔍 Job Search
 
 ### Search Jobs
 ```http
-GET /jobs/search?location=USA&salary=50000&visa=sponsored&experience=senior&type=full_time
+GET /jobs/search?location=USA&salary=50000&visa=sponsored&experience=senior&type=full-time
 ```
 
 **Query Parameters:**
@@ -128,7 +310,7 @@ GET /jobs/search?location=USA&salary=50000&visa=sponsored&experience=senior&type
 - `salary`: Minimum salary
 - `visa`: "sponsored" or "not_required"
 - `experience`: "entry", "mid", "senior"
-- `type`: "full_time", "part_time", "contract"
+- `type`: "full-time", "part-time"
 - `page`: Page number (default: 1)
 - `limit`: Items per page (default: 10)
 
@@ -243,17 +425,10 @@ Content-Type: application/json
     "max": 180000,
     "currency": "USD"
   },
-  "type": "full_time",
+  "type": "full-time",
   "visaSponsorship": true,
   "benefits": ["Health insurance", "401k", "Remote work"]
 }
-```
-
-#### Manage Job Postings
-```http
-GET /company/jobs
-PUT /jobs/:jobId
-DELETE /jobs/:jobId
 ```
 
 ## 📅 Interview Management
@@ -266,15 +441,12 @@ Content-Type: application/json
 {
   "applicationId": "app123",
   "type": "video", // or "phone", "in_person"
-  "scheduledAt": "2024-01-15T14:00:00Z",
+  "scheduledTime": "2024-01-15T14:00:00Z",
+  "timezone": "America/New_York",
   "duration": 60, // in minutes
-  "notes": "Please join via Zoom link..."
+  "locationUrl": "https://zoom.us/j/123456789",
+  "interviewer": "John Smith"
 }
-```
-
-### Get Interview Details
-```http
-GET /interviews/:interviewId
 ```
 
 ## 📄 Contract Management
@@ -286,25 +458,28 @@ Content-Type: application/json
 
 {
   "applicationId": "app123",
-  "jobId": "job123",
+  "contractType": "full-time",
+  "startDate": "2024-02-01",
+  "endDate": "2025-02-01", // Optional
+  "probationPeriod": 90,
   "salary": {
     "amount": 150000,
     "currency": "USD",
     "period": "yearly"
   },
-  "benefits": ["Health insurance", "401k"],
-  "startDate": "2024-02-01",
-  "terms": "Full-time employment contract..."
+  "benefits": "Health insurance, 401k, Remote work",
+  "visaSupport": true,
+  "relocation": true
 }
 ```
 
-### Manage Contract Status
+### Update Contract Status
 ```http
 PUT /contracts/:contractId/status
 Content-Type: application/json
 
 {
-  "status": "accepted" // or "rejected", "pending"
+  "status": "active" // draft, active, completed, terminated
 }
 ```
 
@@ -321,9 +496,9 @@ GET /notifications
   "notifications": [
     {
       "id": "notif123",
-      "type": "application_update",
-      "message": "Your application status has been updated",
-      "read": false,
+      "type": "contract",
+      "message": "New contract has been sent for review",
+      "isRead": false,
       "createdAt": "2024-01-01T00:00:00Z"
     }
   ]
@@ -335,20 +510,32 @@ GET /notifications
 PUT /notifications/:notificationId/read
 ```
 
-## 🌐 International Features
+## 🛡 Admin Controls
 
-### Visa Management
+### User Management
+
+#### Manage User Status
 ```http
-GET /user/visa
-POST /user/visa
-PUT /user/visa/:visaId
+POST /admin/users/:userId/manage
+Content-Type: application/json
+
+{
+  "action": "suspend", // suspend, delete, warn, restrict
+  "reason": "Violation of terms of service"
+}
 ```
 
-### Foreign Experience
+### Company Verification
+
+#### Verify Company
 ```http
-GET /user/foreign-experience
-POST /user/foreign-experience
-PUT /user/foreign-experience/:experienceId
+POST /admin/companies/:companyId/verify
+Content-Type: application/json
+
+{
+  "verified": true,
+  "notes": "Company documents verified successfully"
+}
 ```
 
 ## ⚠️ Error Responses
