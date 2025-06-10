@@ -303,14 +303,10 @@ const router = express.Router();
 router
   .post('/work-experiences', JwtAuthGuard, WorkExperienceController.createWorkExperience)
   .get('/work-experiences', JwtAuthGuard, WorkExperienceController.getUserWorkExperiences)
-  .get(
-    '/users/:userId/work-experiences',
-    JwtAuthGuard,
-    SelfGuard,
-    WorkExperienceController.getUserWorkExperiences
-  )
+  .get('/users/:userId/work-experiences', JwtAuthGuard, SelfGuard, WorkExperienceController.getUserWorkExperiences)
   .get('/work-experiences/:id', JwtAuthGuard, WorkExperienceController.getWorkExperienceById)
   .patch('/work-experiences/:id', JwtAuthGuard, WorkExperienceController.updateWorkExperience)
-  .delete('/work-experiences/:id', JwtAuthGuard, WorkExperienceController.deleteWorkExperience);
+  .delete('/work-experiences/:id', JwtAuthGuard, WorkExperienceController.deleteWorkExperience)
+  .patch('/work-experiences/:id/current', JwtAuthGuard, WorkExperienceController.setCurrentWorkExperience);
 
 export default router;

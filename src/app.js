@@ -11,7 +11,6 @@ import SkillRouter from './routes/skill.routes.js';
 import WorkExperienceRouter from './routes/work-experience.routes.js';
 import jobSearchRoutes from './routes/job-search.routes.js';
 import exampleRoutes from './routes/example.routes.js';
-import { setupSwagger } from './config/swagger.js';
 import errorHandler from './utils/errorHandler.js';
 
 // Initialize express application
@@ -36,12 +35,13 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Setup Swagger
-setupSwagger(app);
-
-// Root route - redirect to API docs
+// Root route - welcome page
 app.get('/', (req, res) => {
-  res.redirect('/api-docs');
+  res.json({
+    success: true,
+    message: 'Welcome to Job Platform API',
+    version: '1.0.0'
+  });
 });
 
 // API root endpoint
@@ -52,8 +52,7 @@ app.get('/api', (req, res) => {
     version: '1.0.0',
     availableEndpoints: [
       { path: '/api/auth', description: 'Authentication and user management' },
-      { path: '/api/jobs/search', description: 'Job search functionality' },
-      { path: '/api-docs', description: 'API documentation (Swagger UI)' }
+      { path: '/api/jobs/search', description: 'Job search functionality' }
     ]
   });
 });

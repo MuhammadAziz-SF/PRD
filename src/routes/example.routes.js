@@ -11,14 +11,30 @@ router.get('/', (req, res) => {
   res.json({
     success: true,
     message: 'Examples API',
-    availableExamples: [
-      { path: '/examples/job-search', description: 'Job Search Example' }
-    ]
+    examples: [
+      {
+        id: '1',
+        name: 'Example 1',
+        description: 'This is an example',
+      },
+      {
+        id: '2',
+        name: 'Example 2',
+        description: 'This is another example',
+      },
+    ],
   });
 });
 
-router.get('/job-search', (req, res) => {
-  res.sendFile(path.join(__dirname, '../examples/job-search.html'));
+router.get('/:id', (req, res) => {
+  res.json({
+    success: true,
+    data: {
+      id: req.params.id,
+      name: `Example ${req.params.id}`,
+      description: 'This is an example',
+    },
+  });
 });
 
 export default router; 
