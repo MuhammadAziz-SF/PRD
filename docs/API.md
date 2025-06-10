@@ -11,13 +11,14 @@ Authorization: Bearer <your_jwt_token>
 ### Authentication Endpoints
 
 #### Register New User
+
 ```http
-POST /auth/signup
+POST /auth/sign up
 Content-Type: application/json
 
 {
   "email": "user@example.com",
-  "password": "securepassword",
+  "password": "secure password",
   "firstName": "John",
   "lastName": "Doe",
   "userType": "job_seeker" // or "employer"
@@ -25,6 +26,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "message": "Registration successful. Please check your email for verification.",
@@ -33,17 +35,19 @@ Content-Type: application/json
 ```
 
 #### Login
+
 ```http
 POST /auth/login
 Content-Type: application/json
 
 {
   "email": "user@example.com",
-  "password": "securepassword"
+  "password": "secure password"
 }
 ```
 
 **Response:**
+
 ```json
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
@@ -60,51 +64,61 @@ Content-Type: application/json
 ### ENUM Types
 
 #### Gender
+
 ```sql
 ENUM ('male', 'female', 'other')
 ```
 
 #### Job Status
+
 ```sql
 ENUM ('active', 'inactive', 'terminated')
 ```
 
 #### Proficiency
+
 ```sql
 ENUM ('beginner', 'intermediate', 'advanced', 'expert')
 ```
 
 #### Language Proficiency
+
 ```sql
 ENUM ('basic', 'conversational', 'fluent', 'native')
 ```
 
 #### Visa Status
+
 ```sql
 ENUM ('applied', 'approved', 'rejected', 'expired')
 ```
 
 #### Job Type
+
 ```sql
 ENUM ('full-time', 'part-time')
 ```
 
 #### Application Status
+
 ```sql
 ENUM ('submitted', 'under_review', 'shortlisted', 'rejected', 'accepted')
 ```
 
 #### Contract Status
+
 ```sql
 ENUM ('draft', 'active', 'completed', 'terminated')
 ```
 
 #### Notification Type
+
 ```sql
 ENUM ('job_alert', 'interview', 'contract', 'application_update', 'system')
 ```
 
 #### User Action
+
 ```sql
 ENUM ('suspend', 'delete', 'warn', 'restrict')
 ```
@@ -114,11 +128,13 @@ ENUM ('suspend', 'delete', 'warn', 'restrict')
 ### Profile Endpoints
 
 #### Get User Profile
+
 ```http
 GET /user/profile
 ```
 
 **Response:**
+
 ```json
 {
   "id": "123e4567-e89b-12d3-a456-426614174000",
@@ -136,6 +152,7 @@ GET /user/profile
 ```
 
 #### Update Profile
+
 ```http
 PUT /user/profile
 Content-Type: application/json
@@ -153,6 +170,7 @@ Content-Type: application/json
 ### Address Management
 
 #### Add/Update Address
+
 ```http
 POST /user/address
 Content-Type: application/json
@@ -170,6 +188,7 @@ Content-Type: application/json
 ### Document Management
 
 #### Upload Resume
+
 ```http
 POST /user/upload-resume
 Content-Type: multipart/form-data
@@ -182,6 +201,7 @@ Content-Type: multipart/form-data
 ```
 
 #### Upload Additional Documents
+
 ```http
 POST /user/upload-documents
 Content-Type: multipart/form-data
@@ -197,6 +217,7 @@ Content-Type: multipart/form-data
 ### Education
 
 #### Add Education
+
 ```http
 POST /user/education
 Content-Type: application/json
@@ -217,6 +238,7 @@ Content-Type: application/json
 ### Work Experience
 
 #### Add Work Experience
+
 ```http
 POST /user/work-experience
 Content-Type: application/json
@@ -237,6 +259,7 @@ Content-Type: application/json
 ### Skills
 
 #### Add Skill
+
 ```http
 POST /user/skills
 Content-Type: application/json
@@ -252,6 +275,7 @@ Content-Type: application/json
 ### Languages
 
 #### Add Language
+
 ```http
 POST /user/languages
 Content-Type: application/json
@@ -266,6 +290,7 @@ Content-Type: application/json
 ### Certifications
 
 #### Add Certification
+
 ```http
 POST /user/certifications
 Content-Type: application/json
@@ -284,6 +309,7 @@ Content-Type: application/json
 ### Visa Information
 
 #### Add Visa Info
+
 ```http
 POST /user/visa
 Content-Type: application/json
@@ -301,11 +327,13 @@ Content-Type: application/json
 ## 🔍 Job Search
 
 ### Search Jobs
+
 ```http
 GET /jobs/search?location=USA&salary=50000&visa=sponsored&experience=senior&type=full-time
 ```
 
 **Query Parameters:**
+
 - `location`: Country or city
 - `salary`: Minimum salary
 - `visa`: "sponsored" or "not_required"
@@ -315,6 +343,7 @@ GET /jobs/search?location=USA&salary=50000&visa=sponsored&experience=senior&type
 - `limit`: Items per page (default: 10)
 
 **Response:**
+
 ```json
 {
   "jobs": [
@@ -339,6 +368,7 @@ GET /jobs/search?location=USA&salary=50000&visa=sponsored&experience=senior&type
 ```
 
 ### Save Job
+
 ```http
 POST /jobs/save
 Content-Type: application/json
@@ -349,6 +379,7 @@ Content-Type: application/json
 ```
 
 ### Get Saved Jobs
+
 ```http
 GET /jobs/saved
 ```
@@ -356,6 +387,7 @@ GET /jobs/saved
 ## 📝 Job Applications
 
 ### Apply for Job
+
 ```http
 POST /applications
 Content-Type: application/json
@@ -369,11 +401,13 @@ Content-Type: application/json
 ```
 
 ### Track Applications
+
 ```http
 GET /applications
 ```
 
 **Response:**
+
 ```json
 {
   "applications": [
@@ -393,6 +427,7 @@ GET /applications
 ### Company Profile
 
 #### Create/Update Company Profile
+
 ```http
 POST /company/profile
 Content-Type: application/json
@@ -411,6 +446,7 @@ Content-Type: application/json
 ### Job Posting
 
 #### Create Job Posting
+
 ```http
 POST /jobs/post
 Content-Type: application/json
@@ -434,6 +470,7 @@ Content-Type: application/json
 ## 📅 Interview Management
 
 ### Schedule Interview
+
 ```http
 POST /interviews/schedule
 Content-Type: application/json
@@ -452,6 +489,7 @@ Content-Type: application/json
 ## 📄 Contract Management
 
 ### Create Contract
+
 ```http
 POST /contracts
 Content-Type: application/json
@@ -474,6 +512,7 @@ Content-Type: application/json
 ```
 
 ### Update Contract Status
+
 ```http
 PUT /contracts/:contractId/status
 Content-Type: application/json
@@ -486,11 +525,13 @@ Content-Type: application/json
 ## 🔔 Notifications
 
 ### Get Notifications
+
 ```http
 GET /notifications
 ```
 
 **Response:**
+
 ```json
 {
   "notifications": [
@@ -506,6 +547,7 @@ GET /notifications
 ```
 
 ### Mark Notification as Read
+
 ```http
 PUT /notifications/:notificationId/read
 ```
@@ -515,6 +557,7 @@ PUT /notifications/:notificationId/read
 ### User Management
 
 #### Manage User Status
+
 ```http
 POST /admin/users/:userId/manage
 Content-Type: application/json
@@ -528,6 +571,7 @@ Content-Type: application/json
 ### Company Verification
 
 #### Verify Company
+
 ```http
 POST /admin/companies/:companyId/verify
 Content-Type: application/json
@@ -555,6 +599,7 @@ All endpoints may return the following error responses:
 ```
 
 Common error codes:
+
 - `UNAUTHORIZED`: Invalid or missing authentication token
 - `FORBIDDEN`: Insufficient permissions
 - `NOT_FOUND`: Resource not found
@@ -564,12 +609,14 @@ Common error codes:
 ## 📝 Rate Limiting
 
 API requests are limited to:
+
 - 100 requests per minute for authenticated users
 - 20 requests per minute for unauthenticated users
 
 Rate limit headers are included in all responses:
+
 ```http
 X-RateLimit-Limit: 100
 X-RateLimit-Remaining: 95
 X-RateLimit-Reset: 1625097600
-``` 
+```

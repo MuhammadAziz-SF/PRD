@@ -1,0 +1,614 @@
+{
+  "info": {
+    "name": "Job Abroad Platform API",
+    "description": "API collection for the Job Abroad Platform application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Authentication and user management endpoints",
+      "item": [
+        {
+          "name": "Sign Up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/signUp",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "signUp"]
+            },
+            "description": "Register a new user"
+          }
+        },
+        {
+          "name": "Sign In",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/singIn",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "singIn"]
+            },
+            "description": "Login a user and get access token"
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/users?limit=10&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "users"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Get all users (requires authentication)"
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/user/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "user", "{{userId}}"]
+            },
+            "description": "Get a user by ID (requires authentication)"
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"updated@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/user/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "user", "{{userId}}"]
+            },
+            "description": "Update a user (requires authentication)"
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/user/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "user", "{{userId}}"]
+            },
+            "description": "Delete a user (requires admin role)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Job Search",
+      "description": "Job search and filtering endpoints",
+      "item": [
+        {
+          "name": "Search Jobs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/jobs/search?keywords=developer&country=USA&city=New York&category=IT&type=full-time&experienceLevel=mid&salaryMin=50000&salaryMax=150000&visaSponsorship=true&relocationAssistance=true&remoteOption=true&limit=10&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "jobs", "search"],
+              "query": [
+                {
+                  "key": "keywords",
+                  "value": "developer"
+                },
+                {
+                  "key": "country",
+                  "value": "USA"
+                },
+                {
+                  "key": "city",
+                  "value": "New York"
+                },
+                {
+                  "key": "category",
+                  "value": "IT"
+                },
+                {
+                  "key": "type",
+                  "value": "full-time"
+                },
+                {
+                  "key": "experienceLevel",
+                  "value": "mid"
+                },
+                {
+                  "key": "salaryMin",
+                  "value": "50000"
+                },
+                {
+                  "key": "salaryMax",
+                  "value": "150000"
+                },
+                {
+                  "key": "visaSponsorship",
+                  "value": "true"
+                },
+                {
+                  "key": "relocationAssistance",
+                  "value": "true"
+                },
+                {
+                  "key": "remoteOption",
+                  "value": "true"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                }
+              ]
+            },
+            "description": "Search for jobs with various filters"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Addresses",
+      "description": "User address management endpoints",
+      "item": [
+        {
+          "name": "Create Address",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"addressLine1\": \"123 Main Street\",\n  \"city\": \"New York\",\n  \"state\": \"NY\",\n  \"postalCode\": 10001,\n  \"country\": \"USA\",\n  \"isDefault\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/addresses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "addresses"]
+            },
+            "description": "Create a new address"
+          }
+        },
+        {
+          "name": "Get User Addresses",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/addresses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "addresses"]
+            },
+            "description": "Get all addresses for the authenticated user"
+          }
+        },
+        {
+          "name": "Get User Addresses by User ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/addresses",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "users", "{{userId}}", "addresses"]
+            },
+            "description": "Get all addresses for a specific user"
+          }
+        },
+        {
+          "name": "Get Address by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/addresses/{{addressId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "addresses", "{{addressId}}"]
+            },
+            "description": "Get a specific address by ID"
+          }
+        },
+        {
+          "name": "Update Address",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"addressLine1\": \"456 Updated Street\",\n  \"city\": \"New York\",\n  \"state\": \"NY\",\n  \"postalCode\": 10002,\n  \"country\": \"USA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/addresses/{{addressId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "addresses", "{{addressId}}"]
+            },
+            "description": "Update an address"
+          }
+        },
+        {
+          "name": "Delete Address",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/addresses/{{addressId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "addresses", "{{addressId}}"]
+            },
+            "description": "Delete an address"
+          }
+        },
+        {
+          "name": "Set Default Address",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/addresses/{{addressId}}/default",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "addresses", "{{addressId}}", "default"]
+            },
+            "description": "Set an address as default"
+          }
+        }
+      ]
+    },
+    {
+      "name": "User Profile",
+      "description": "User profile management endpoints",
+      "item": [
+        {
+          "name": "Education",
+          "item": [
+            {
+              "name": "Create Education",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"institution\": \"Harvard University\",\n  \"degree\": \"Bachelor of Science\",\n  \"fieldOfStudy\": \"Computer Science\",\n  \"startDate\": \"2018-09-01\",\n  \"endDate\": \"2022-05-31\",\n  \"description\": \"GPA: 3.8\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/education",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "education"]
+                },
+                "description": "Add education to user profile"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Work Experience",
+          "item": [
+            {
+              "name": "Create Work Experience",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companyName\": \"Google\",\n  \"position\": \"Software Engineer\",\n  \"location\": \"Mountain View, CA\",\n  \"startDate\": \"2022-06-01\",\n  \"endDate\": null,\n  \"isCurrent\": true,\n  \"description\": \"Full-stack development using React and Node.js\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/work-experiences",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "work-experiences"]
+                },
+                "description": "Add work experience to user profile"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Skills",
+          "item": [
+            {
+              "name": "Create Skill",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"JavaScript\",\n  \"proficiencyLevel\": \"advanced\",\n  \"yearsOfExperience\": 5\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/skills",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "skills"]
+                },
+                "description": "Add skill to user profile"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Languages",
+          "item": [
+            {
+              "name": "Create Language",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"English\",\n  \"proficiencyLevel\": \"native\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/languages",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "languages"]
+                },
+                "description": "Add language to user profile"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Certifications",
+          "item": [
+            {
+              "name": "Create Certification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{accessToken}}"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"AWS Certified Solutions Architect\",\n  \"issuingOrganization\": \"Amazon Web Services\",\n  \"issueDate\": \"2023-01-15\",\n  \"expirationDate\": \"2026-01-15\",\n  \"credentialID\": \"AWS-123456\",\n  \"credentialURL\": \"https://aws.amazon.com/verification/123456\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/certifications",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["api", "certifications"]
+                },
+                "description": "Add certification to user profile"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "System",
+      "description": "System endpoints",
+      "item": [
+        {
+          "name": "API Root",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api",
+              "host": ["{{baseUrl}}"],
+              "path": ["api"]
+            },
+            "description": "API root information"
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "Check API health status"
+          }
+        },
+        {
+          "name": "API Documentation",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api-docs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api-docs"]
+            },
+            "description": "Swagger API documentation"
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:40044",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "addressId",
+      "value": "",
+      "type": "string"
+    }
+  ]
+} 
